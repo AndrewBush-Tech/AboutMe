@@ -4,7 +4,8 @@ import "react-chat-widget/lib/styles.css";
 import botAvatar from "../assets/bot-avatar.png";
 import "./ChatBot.css";
 
-const HF_TOKEN = process.env.REACT_APP_HF_TOKEN;
+const HF_TOKEN = "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"; // Replaced .env variable with a direct token (read only) for deployment on GitHub Pages.
+// Note: In production, it's better to use environment variables or a secure vault for sensitive tokens.
 const HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.3";
 
 async function fetchAIResponse(message) {
