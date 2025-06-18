@@ -7,6 +7,7 @@ import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import ChatBot from "./components/ChatBot";
 import "./App.css";
 
 function App() {
@@ -16,26 +17,20 @@ function App() {
   );
 
   useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add("dark-mode");
-      document.body.classList.remove("light-mode");
-    } else {
-      document.body.classList.add("light-mode");
-      document.body.classList.remove("dark-mode");
-    }
-
+    document.body.classList.toggle("dark-mode", darkMode);
+    document.body.classList.toggle("light-mode", !darkMode);
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
   }, [darkMode]);
 
-  const toggleDarkMode = () => {
-    setDarkMode((prevMode) => !prevMode);
-  };
+  const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
   return (
     <div>
-      <button onClick={toggleDarkMode} className="mode-toggle">
-        {darkMode ? "🌙"  :"🌞" }
-      </button>
+      <div className="mode-toggle-wrapper">
+        <button onClick={toggleDarkMode} className="mode-toggle">
+          {darkMode ? "🌙" : "🌞"}
+        </button>
+      </div>
       <main>
         <Navbar />
         <Hero />
@@ -46,6 +41,7 @@ function App() {
         <Contact />
         <Footer />
       </main>
+      <ChatBot />
     </div>
   );
 }

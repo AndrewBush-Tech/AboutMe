@@ -1,0 +1,81 @@
+.rcw-widget-container {
+  position: fixed !important;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10000 !important;
+  pointer-events: auto !important;
+}
+
+.rcw-conversation-container {
+  pointer-events: auto !important;
+}
+
+.rcw-sender input {
+  background-color: #fff !important;
+  color: #000 !important;
+  caret-color: #000 !important;
+  pointer-events: auto !important;
+}
+.rcw-input {
+  color: #000 !important;            /* black text */
+  background-color: #fff !important; /* white background */
+  caret-color: #000 !important;      /* black blinking cursor */
+  padding: 8px !important;           /* some padding so text isn't cramped */
+  font-size: 1.1rem !important;      /* make the text readable */
+  border-radius: 6px !important;
+  border: 1px solid #ccc !important;
+  min-height: 40px !important;
+  outline: none !important;
+  user-select: text !important;
+  white-space: pre-wrap !important;  /* wrap text properly */
+  overflow-y: auto !important;
+  box-sizing: border-box !important;
+}
+/* Bot (response) message bubble */
+.rcw-message.bot .rcw-message-text {
+  background-color: #004d40 !important; /* dark teal or choose any dark color */
+  color: #fff !important;               /* white text */
+  border-radius: 12px !important;
+  padding: 10px 15px !important;
+  max-width: 75% !important;
+  font-size: 1rem !important;
+}
+
+/* User message bubble */
+.rcw-message.user .rcw-message-text {
+  background-color: #e0e0e0 !important; /* light gray */
+  color: #000 !important;                /* black text */
+  border-radius: 12px !important;
+  padding: 10px 15px !important;
+  max-width: 75% !important;
+  font-size: 1rem !important;
+}
+
+/* Make sure message container uses readable background */
+.rcw-conversation-container {
+  background-color: #f5f5f5 !important; /* light background for chat area */
+  color: #000 !important;
+  max-height: 400px !important;
+  overflow-y: auto !important;
+}
+.emoji-toggle-btn {
+  background: black;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  padding: 0;
+}
+
+.emoji-toggle-btn:hover {
+  transform: scale(1.1);
+}
+
+.rcw-send-icon {
+  filter: brightness(0); /* Makes the icon black */
+}
+
+.rcw-picker-btn {
+  display: none !important;
+}
