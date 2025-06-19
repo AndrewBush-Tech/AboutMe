@@ -2,7 +2,7 @@
   "name": "interactive-resume",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://andrewbush-tech.github.io/AboutMe/",
+  "homepage":  ".",
   "dependencies": {
     "cra-template": "1.2.0",
     "emoji-mart": "^5.6.0",
