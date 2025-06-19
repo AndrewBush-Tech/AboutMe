@@ -4,12 +4,11 @@ import "react-chat-widget/lib/styles.css";
 import botAvatar from "../assets/bot-avatar.png";
 import "./ChatBot.css";
 
-const HF_TOKEN = "";
 const HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.3";
 
 async function fetchAIResponse(message) {
   try {
-    const response = await fetch('/api/chat', {
+    const response = await fetch("/api/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,7 +29,6 @@ async function fetchAIResponse(message) {
     return "Sorry, something went wrong with the AI.";
   }
 }
-
 
 function ChatBot() {
   async function handleNewUserMessage(msg) {
