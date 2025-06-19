@@ -1,7 +1,7 @@
 # Andrew Bush – Interactive Resume
 
 ### 🌐 Live Site  
-[🔗 View My Resume Website](https://andrewbush-tech.github.io/AboutMe/)
+[🔗 View My Resume Website](https://about-2vm6xkogb-andrew-bushs-projects.vercel.app/)
 
 ---
 
