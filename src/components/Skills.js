@@ -6,11 +6,11 @@ import "./Skills.css";
 
 export default function SkillsCarousel() {
   const skills = [
-    { name: "Python", url: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png" },
-    { name: "JavaScript", url: "https://cdn-icons-png.flaticon.com/512/5968/5968292.png" },
-    { name: "C++", url: "https://cdn-icons-png.flaticon.com/512/6132/6132222.png" },
-    { name: "React", url: "https://cdn-icons-png.flaticon.com/512/1126/1126012.png" },
-    { name: "Java", url: "https://cdn-icons-png.flaticon.com/512/226/226777.png" },
+    { name: "Python", url: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png", description: "A high-level programming language used for web development, data science, and AI." },
+    { name: "JavaScript", url: "https://cdn-icons-png.flaticon.com/512/5968/5968292.png", description: "A versatile language primarily used for web development to create interactive elements." },
+    { name: "C++", url: "https://cdn-icons-png.flaticon.com/512/6132/6132222.png", description: "A powerful programming language used for system software, game development, and performance-critical applications." },
+    { name: "React", url: "https://cdn-icons-png.flaticon.com/512/1126/1126012.png", description: "A JavaScript library for building user interfaces, particularly for single-page applications." },
+    { name: "Java", url: "https://cdn-icons-png.flaticon.com/512/226/226777.png", description: "A widely used object-oriented language known for its portability across platforms, especially in enterprise applications." },
   ];
 
   const settings = {
@@ -29,11 +29,14 @@ export default function SkillsCarousel() {
         <Slider {...settings}>
           {skills.map((skill, index) => (
             <div key={index} className="skill-item">
-              <img
-                src={skill.url}
-                alt={skill.name}
-                className="skill-image"
-              />
+              <div className="skill-image-container">
+                <img
+                  src={skill.url}
+                  alt={skill.name}
+                  className="skill-image"
+                />
+                <div className="skill-description">{skill.description}</div>
+              </div>
               <p className="skill-name">{skill.name}</p>
             </div>
           ))}
