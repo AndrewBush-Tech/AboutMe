@@ -13,7 +13,9 @@ The app allows users to upload resumes, which are then analyzed and compared to 
 Built an efficient system for scraping and storing job data, ensuring that the app can handle large datasets.
 Integrated a front-end interface with React for a seamless user experience, enabling users to easily upload their resumes and view the best matching jobs.
       `,
-      link: "https://andrewbush-tech.github.io/jobFinder/"
+      link: "https://andrewbush-tech.github.io/jobFinder/",
+      jobTrackerLink: "https://github.com/AndrewBush-Tech/JobTracker",
+      jobTrackerDescription: "This repository contains the full-stack Job Tracker application, designed to help users manage job applications generated from the Job Matching system. It also includes functionality for converting database files into JSON format, enabling easy manipulation and seamless tracking of job application progress."
     },
     {
       title: "Autonomous Vehicle Research Software Optimization",
@@ -58,6 +60,23 @@ response reliability.
                 <p className="project-description">{project.description}</p>
               </AnimatedCard>
             </a>
+
+            {/* Render the JobTracker link below "Job Matching and Resume Analysis" */}
+            {project.title === "Job Matching and Resume Analysis" && (
+              <>
+                <p className="project-relation">
+                  <b>Related Project:</b> {project.jobTrackerDescription}
+                </p>
+                <a
+                  href={project.jobTrackerLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-button"
+                >
+                  View JobTracker Repo
+                </a>
+              </>
+            )}
 
             {/* Render the Comma.ai link and description for the Autonomous Vehicle Project */}
             {project.commaLink && (
