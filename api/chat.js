@@ -1,32 +1,51 @@
-// /api/chat.js
+import React from "react";
+import { Widget, addResponseMessage } from "react-chat-widget";
+import "react-chat-widget/lib/styles.css";
+import botAvatar from "../assets/bot-avatar.png";
+import "./ChatBot.css";
 
-import OpenAI from "openai";
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY, // Don't hardcode the key!
-});
-
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Only POST requests allowed" });
-  }
-
+async function fetchAIResponse(message) {
   try {
-    const { message } = req.body;
-
-    const chatCompletion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo", // Use "gpt-4" if available
-      messages: [
-        { role: "system", content: "You are a helpful assistant for Andrew Bush's resume." },
-        { role: "user", content: message },
-      ],
-      max_tokens: 150,
-      temperature: 0.7,
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message }),
     });
 
-    res.status(200).json({ response: chatCompletion.choices[0].message.content });
-  } catch (err) {
-    console.error("OpenAI API error:", err);
-    res.status(500).json({ error: "Internal server error" });
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Backend error:", response.status, errorText);
+      throw new Error(`Backend error ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.response || "Sorry, I didn't understand that.";
+  } catch (e) {
+    console.error("fetchAIResponse error:", e);
+    return "Sorry, something went wrong.";
   }
 }
+
+function ChatBot() {
+  async function handleNewUserMessage(msg) {
+    addResponseMessage("...thinking...");
+    const answer = await fetchAIResponse(msg);
+    addResponseMessage(answer);
+  }
+
+  return (
+    <Widget
+      handleNewUserMessage={handleNewUserMessage}
+      profileAvatar={botAvatar}
+      title="Ask Me Anything"
+      subtitle="AI Resume Assistant"
+      senderPlaceHolder="Type your question..."
+      showCloseButton
+      showEmoji={true}
+    />
+  );
+}
+
+export default ChatBot;
