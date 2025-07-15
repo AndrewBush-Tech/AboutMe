@@ -4,8 +4,6 @@ import "react-chat-widget/lib/styles.css";
 import botAvatar from "../assets/bot-avatar.png";
 import "./ChatBot.css";
 
-const HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.3";
-
 async function fetchAIResponse(message) {
   try {
     const response = await fetch("/api/chat", {
@@ -19,22 +17,22 @@ async function fetchAIResponse(message) {
     if (!response.ok) {
       const errorText = await response.text();
       console.error("Backend error:", response.status, errorText);
-      throw new Error(`Backend error ${response.status}`);
+      return "Sorry, I couldn't get a response.";
     }
 
     const data = await response.json();
-    return data.response || "Sorry, I didn't understand that.";
-  } catch (e) {
-    console.error("fetchAIResponse error:", e);
-    return "Sorry, something went wrong with the AI.";
+    return data.response || "No response from AI.";
+  } catch (err) {
+    console.error("fetchAIResponse error:", err);
+    return "Error contacting the AI.";
   }
 }
 
 function ChatBot() {
   async function handleNewUserMessage(msg) {
     addResponseMessage("...thinking...");
-    const answer = await fetchAIResponse(msg);
-    addResponseMessage(answer);
+    const reply = await fetchAIResponse(msg);
+    addResponseMessage(reply);
   }
 
   return (
@@ -43,9 +41,6 @@ function ChatBot() {
       profileAvatar={botAvatar}
       title="Ask Me Anything"
       subtitle="AI Resume Assistant"
-      senderPlaceHolder="Type a question..."
-      showCloseButton
-      showEmoji={true}
     />
   );
 }
