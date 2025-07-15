@@ -6,7 +6,7 @@ import "./ChatBot.css";
 
 async function fetchAIResponse(message) {
   try {
-    const response = await fetch("/api/chat", {
+    const response = await fetch("/api/chat", { // Keep this path, works on Vercel too
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -17,22 +17,22 @@ async function fetchAIResponse(message) {
     if (!response.ok) {
       const errorText = await response.text();
       console.error("Backend error:", response.status, errorText);
-      return "Sorry, I couldn't get a response.";
+      throw new Error(`Backend error ${response.status}`);
     }
 
     const data = await response.json();
-    return data.response || "No response from AI.";
-  } catch (err) {
-    console.error("fetchAIResponse error:", err);
-    return "Error contacting the AI.";
+    return data.response || "Sorry, I didn't understand that.";
+  } catch (e) {
+    console.error("fetchAIResponse error:", e);
+    return "Sorry, something went wrong with the AI.";
   }
 }
 
 function ChatBot() {
   async function handleNewUserMessage(msg) {
     addResponseMessage("...thinking...");
-    const reply = await fetchAIResponse(msg);
-    addResponseMessage(reply);
+    const answer = await fetchAIResponse(msg);
+    addResponseMessage(answer);
   }
 
   return (
@@ -41,6 +41,9 @@ function ChatBot() {
       profileAvatar={botAvatar}
       title="Ask Me Anything"
       subtitle="AI Resume Assistant"
+      senderPlaceHolder="Type your question..."
+      showCloseButton
+      showEmoji={true}
     />
   );
 }
