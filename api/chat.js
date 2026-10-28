@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     const { message } = req.body;
 
     const chatCompletion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-5.4-mini",
       messages: [
         {
           role: "system",
@@ -44,8 +44,7 @@ Stay truthful and helpful in all answers.
         },
         { role: "user", content: message },
       ],
-      max_tokens: 300,
-      temperature: 0.6,
+            max_completion_tokens: 1500,
     });
 
     res.status(200).json({ response: chatCompletion.choices[0].message.content });
